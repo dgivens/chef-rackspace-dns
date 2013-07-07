@@ -19,8 +19,9 @@
 
 begin
     require 'fog'
+    require 'dnsruby'
 rescue LoadError
-    Chef::Log.warn("Skipping RSDNS due to missing gem 'fog'")
+    Chef::Log.info("Missing gems. Will install and load them later.")
 end
 
 module Rackspace

@@ -24,6 +24,9 @@ package( "build-essential" ).run_action( :install )
 chef_gem "fog"
 chef_gem "dnsruby"
 
+require "fog"
+require "dnsruby"
+
 begin
   # Access the Rackspace Cloud encrypted data_bag
   raxcloud = Chef::EncryptedDataBagItem.load("rackspace","cloud")
