@@ -21,7 +21,7 @@ begin
     require 'fog'
     require 'dnsruby'
 rescue LoadError
-    Chef::Log.info("Missing gems. Will install and load them later.")
+    Chef::Log.info("Missing gems for rsnds. Will install and load them later.")
 end
 
 module Rackspace
@@ -30,18 +30,24 @@ module Rackspace
     def rsdns
       begin
         creds = Chef::EncryptedDataBagItem.load("rackspace", "cloud")
-        if creds['region'] == 'us'
-          auth_url = 'https://identity.api.rackspacecloud.com/v2.0'
-        elsif node['rsdns']['rackspace_auth_region']  == 'uk'
-          auth_url = 'https://lon.identity.api.rackspacecloud.com/v2.0'
-        end
       rescue Exception => e
-        creds = {'username' => nil, 'apikey' => nil, 'auth_url' => nil }
+        creds = {'username' => nil, 'apikey' => nil, 'region' => nil }
       end
 
-      apikey = new_resource.rackspace_api_key || creds['apikey']
-      username = new_resource.rackspace_username || creds['username']
-      auth_url = new_resource.rackspace_auth_url || auth_url
+      apikey = creds['apikey'] || new_resource.rackspace_api_key
+      username = creds['username'] || new_resource.rackspace_username
+      auth_region = creds['region'] || new_resource.rackspace_auth_region
+
+      if auth_region == 'uk'
+        auth_url = 'https://lon.identity.api.rackspacecloud.com/v2.0'
+      else
+        auth_url = 'https://identity.api.rackspacecloud.com/v2.0'
+      end
+
+      if username == 'your_rackspace_username' || apikey == 'your_rackspace_api_key'
+        Chef::Log.warn "Rackspace username or api key has not been set. For this to work, either set the default attributes or create an encrypted databag of rackspace cloud per the cookbook README"
+      end
+
       @@rsdns ||= Fog::DNS.new(:provider => 'Rackspace', :rackspace_api_key => apikey, 
                                :rackspace_username => username, :rackspace_auth_url => auth_url)
       @@rsdns
