@@ -19,12 +19,12 @@
 
 case node['platform']
 when "ubuntu", "debian"
-  package "libxslt-dev"
-  package "libxml2-dev"
-  package "build-essential"
+  package( "libxslt-dev" ).run_action( :install )
+  package( "libxml2-dev" ).run_action( :install )
+  package( "build-essential" ).run_action( :install )
 when "redhat", "centos", "fedora", "amazon", "scientific"
-  package "libxslt-devel"
-  package "libxml2-devel"
+  package( "libxslt-devel" ).run_action( :install )
+  package( "libxml2-devel" ).run_action( :install )
 end
 
 chef_gem "fog"
