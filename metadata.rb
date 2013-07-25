@@ -1,4 +1,4 @@
-name             'rsdns'
+name             'rackspace-dns'
 maintainer       'Daniel Givens'
 maintainer_email 'daniel.givens@rackspace.com'
 license          'Apache 2.0'

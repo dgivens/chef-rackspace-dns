@@ -1,4 +1,4 @@
-# chef-rsdns
+# chef-rackspace-dns
 
 # Description
 
