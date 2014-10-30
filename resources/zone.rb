@@ -19,20 +19,21 @@
 
 include Rackspace::DNS
 
+default_action :create
+
 actions :create, :delete
 
-attribute :domain, :kind_of => String
+attribute :domain, :kind_of => String, :name_attribute => true
 attribute :email, :kind_of => String, :required => true
 attribute :ttl, :kind_of => [String, Integer], :default => 300
 attribute :rackspace_username, :kind_of => [String, NilClass], :default => nil
 attribute :rackspace_api_key, :kind_of => [String, NilClass], :default => nil
-attribute :rackspace_auth_url, :kind_of => [String, NilClass], :default => nil
+attribute :rackspace_auth_region, :kind_of => [String, NilClass], :default => 'us'
+attribute :mock,                  kind_of: [TrueClass, FalseClass], default: false
 
 def initialize(*args)
   super
-  @action = :create
-  @domain ||= @name
   @rackspace_username ||= node[:rsdns][:rackspace_username]
   @rackspace_api_key ||= node[:rsdns][:rackspace_api_key]
-  @rackspace_auth_url ||= node[:rsdns][:rackspace_auth_url]
+  @rackspace_auth_region ||= node[:rsdns][:rackspace_auth_region]
 end
