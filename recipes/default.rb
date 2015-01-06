@@ -27,6 +27,9 @@ when "redhat", "centos", "fedora", "amazon", "scientific"
   package( "libxml2-devel" ).run_action( :install )
 end
 
+chef_gem "nokogiri" do
+  version node['rsdns']['nokogiri_version']
+end
 chef_gem "fog"
 chef_gem "dnsruby"
 
