@@ -23,6 +23,7 @@ The following dependencies are installed via rsdns::default.
 
 ### Gems
 
+* [nokogiri](http://www.nokogiri.org/)
 * [fog](http://fog.io/) 
 * [rubydns](http://rubyforge.org/projects/dnsruby/)
 
