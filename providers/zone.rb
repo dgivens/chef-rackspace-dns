@@ -24,7 +24,7 @@ action :create do
   zone = rsdns.zones.get(zone_for_id.id)
   if zone.nil?
     Chef::Log.info("Creating new zone for #{new_resource.name}")
-    dns.zones.create(:name => new_resource.name, :email => new_resource.email, :ttl => new_resource.ttl)
+    rsdns.zones.create(:name => new_resource.name, :email => new_resource.email, :ttl => new_resource.ttl)
     new_resource.updated_by_last_action(true)
   else
     if zone.ttl != new_resource.ttl || zone.email != new_resource.email
