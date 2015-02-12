@@ -2,7 +2,7 @@
 # Cookbook Name:: rsdns
 # Recipe:: default
 #
-# Copyright 2013, Rackspace
+# Copyright 2015, Rackspace
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,20 +18,26 @@
 #
 
 case node['platform']
-when "ubuntu", "debian"
-  package( "libxslt-dev" ).run_action( :install )
-  package( "libxml2-dev" ).run_action( :install )
-  package( "build-essential" ).run_action( :install )
-when "redhat", "centos", "fedora", "amazon", "scientific"
-  package( "libxslt-devel" ).run_action( :install )
-  package( "libxml2-devel" ).run_action( :install )
+when 'ubuntu', 'debian'
+  # Doing this because some Rackspace images can lag at bootstrap time
+  execute 'apt-get update' do
+      command 'apt-get update'
+      action :nothing
+  end.run_action(:run)
+
+  package( 'libxslt-dev' ).run_action( :install )
+  package( 'libxml2-dev' ).run_action( :install )
+  package( 'build-essential' ).run_action( :install )
+when 'redhat', 'centos', 'fedora', 'amazon', 'scientific'
+  package( 'libxslt-devel' ).run_action( :install )
+  package( 'libxml2-devel' ).run_action( :install )
 end
 
-chef_gem "nokogiri" do
-  version node['rsdns']['nokogiri_version']
+chef_gem 'nokogiri' do
+  version node['rackspace_dns']['nokogiri_version']
 end
-chef_gem "fog"
-chef_gem "dnsruby"
+chef_gem 'fog'
+chef_gem 'dnsruby'
 
-require "fog"
-require "dnsruby"
+require 'fog'
+require 'dnsruby'
