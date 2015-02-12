@@ -1,8 +1,8 @@
 #
-# Cookbook Name:: rsdns
+# Cookbook Name:: rackspace-dns
 # Attributes:: default
 #
-# Copyright 2013, Rackspace
+# Copyright 2015, Rackspace
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
 # limitations under the License.
 #
 
-default['rsdns']['rackspace_username'] = 'your_rackspace_username'
-default['rsdns']['rackspace_api_key'] = 'your_rackspace_api_key'
-default['rsdns']['rackspace_auth_region'] = 'us'
-default['rsdns']['nokogiri_version'] = '1.6.1'
+default['rackspace_dns']['rackspace_username'] = 'your_rackspace_username'
+default['rackspace_dns']['rackspace_api_key'] = 'your_rackspace_api_key'
+default['rackspace_dns']['rackspace_auth_region'] = 'us'
+default['rackspace_dns']['nokogiri_version'] = '1.6.1'

@@ -1,8 +1,8 @@
 #
-# Cookbook Name:: rsdns
+# Cookbook Name:: rackspace-dns
 # Library:: rsdns
 #
-# Copyright 2013, Rackspace
+# Copyright 2015, Rackspace
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -48,7 +48,7 @@ module Rackspace
         Chef::Log.warn "Rackspace username or api key has not been set. For this to work, either set the default attributes or create an encrypted databag of rackspace cloud per the cookbook README"
       end
 
-      @@rsdns ||= Fog::DNS.new(:provider => 'Rackspace', :rackspace_api_key => apikey, 
+      @@rsdns ||= Fog::DNS.new(:provider => 'Rackspace', :rackspace_api_key => apikey,
                                :rackspace_username => username, :rackspace_auth_url => auth_url)
       @@rsdns
     end

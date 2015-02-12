@@ -1,5 +1,5 @@
 #
-# Cookbook Name:: rsdns
+# Cookbook Name:: rackspace-dns
 # Recipe:: default
 #
 # Copyright 2015, Rackspace

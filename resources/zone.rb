@@ -1,8 +1,8 @@
 #
-# Cookbook Name:: rsdns
+# Cookbook Name:: rackspace-dns
 # Resource:: zone
 #
-# Copyright 2013, Rackspace
+# Copyright 2015, Rackspace
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -33,7 +33,7 @@ attribute :mock,                  kind_of: [TrueClass, FalseClass], default: fal
 
 def initialize(*args)
   super
-  @rackspace_username ||= node[:rsdns][:rackspace_username]
-  @rackspace_api_key ||= node[:rsdns][:rackspace_api_key]
-  @rackspace_auth_region ||= node[:rsdns][:rackspace_auth_region]
+  @rackspace_username ||= node['rackspace_dns']['rackspace_username']
+  @rackspace_api_key ||= node['rackspace_dns']['rackspace_api_key']
+  @rackspace_auth_region ||= node['rackspace_dns']['rackspace_auth_region']
 end

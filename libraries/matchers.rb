@@ -1,6 +1,4 @@
-# define matchers for global definitions and community LWRPs lacking custom matchers
 if defined?(ChefSpec)
-  # stubs for the tar_extract LWRP
   ChefSpec::Runner.define_runner_method :rackspace_dns_zone
   ChefSpec::Runner.define_runner_method :rackspace_dns_record
 
